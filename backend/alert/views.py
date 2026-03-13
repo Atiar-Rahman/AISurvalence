@@ -23,3 +23,12 @@ class NotificationViewSet(viewsets.ModelViewSet):
         notification.is_read = True
         notification.save()
         return Response({'status': 'marked as read'})
+    
+
+    @action(detail=False, methods=['get'])
+    def stats(self, request):
+        qs = self.get_queryset()
+        return Response({
+            "read": qs.filter(is_read=True).count(),
+            "unread": qs.filter(is_read=False).count()
+        })
