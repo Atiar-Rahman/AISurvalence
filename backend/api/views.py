@@ -1,3 +1,6 @@
-from django.shortcuts import render
+from rest_framework.viewsets import ViewSet
+from rest_framework.response import Response
 
-# Create your views here.
+class HomeViewSet(ViewSet):
+    def list(self, request):
+        return Response({"message": "this model is running"})
